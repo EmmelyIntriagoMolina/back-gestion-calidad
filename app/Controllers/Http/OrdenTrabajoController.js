@@ -1,12 +1,9 @@
 'use strict'
-
-
 const Database = use('Database')
 const moment = require('moment')
 
-
 class OrdenTrabajoController { 
-    
+
     //Ingresar
     async ingresarOrdenesTrabajo({request, params, response}){
         try{

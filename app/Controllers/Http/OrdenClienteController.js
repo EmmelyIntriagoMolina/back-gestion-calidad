@@ -11,26 +11,26 @@ class OrdenClienteController {
         try {
 
             
-            let destino = request.input('destino').toUpperCase();
-            let referencia=  request.input('referencia').toUpperCase();
-            let cliente = request.input('cliente').toUpperCase();
-            let producto = request.input('producto').toUpperCase();
-            let observacion  = request.input('observacion').toUpperCase();
-            let fecha = moment().format('DD-MM-YYYY');
+            let destino = request.input('destino')//.toUpperCase();
+            let referencia=  request.input('referencia')//.toUpperCase();
+            let cliente = request.input('cliente')//.toUpperCase();
+            let producto = request.input('producto')//.toUpperCase();
+            let observacion  = request.input('observacion')//.toUpperCase();
+            let fecha = moment().format('YYYY-MM-DD');
             let estado = 1;
 
-            const existe = await Database.raw("select destino, referencia, fecha, cliente, producto, observacion, estado from ordenCliente where destino='"+destino+"' and referencia='"+referencia+"' and cliente='"+cliente+"' and fecha='"+fecha+"' ")
+            /*const existe = await Database.raw("select destino, referencia, fecha, cliente, producto, observacion, estado from ordenCliente where destino='"+destino+"' and referencia='"+referencia+"' and cliente='"+cliente+"' and fecha='"+fecha+"' ")
 
             if(existe[0].length >=1){
 
                 return response.status(200).send({message: 'La orden de cliente que intenta ingresar ya existe'})
             }
-            else {
+            else { */
 
-                const ordenCliente = await Database.raw("insert into ordenCliente (destino, referencia, fecha, cliente, producto, observacion, estado) values ('"+destino+"', '"+referencia+"', '"+fecha+"', '"+cliente+"', '"+producto+"', '"+observacion+"')")
+                const ordenCliente = await Database.raw("insert into ordenCliente (destino, referencia, fecha, cliente, producto, observacion, estado) values ('"+destino+"', '"+referencia+"', '"+fecha+"', '"+cliente+"', '"+producto+"', '"+observacion+"', '"+estado+"')")
                 return response.status(200).send({message: 'Se ha registrado la orden de cliente correctamente', ordenCliente:ordenCliente[0]})
         
-            }
+           // }
 
         }catch (error) {
 
