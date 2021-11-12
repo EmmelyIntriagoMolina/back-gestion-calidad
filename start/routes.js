@@ -7,7 +7,7 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
-
+ 
 //////////////////////////////////////////////////
 //Rutas oden de trabajo CRUD
 //Ingresar orden trabajo
