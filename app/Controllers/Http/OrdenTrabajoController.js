@@ -2,22 +2,23 @@
 const Database = use('Database')
 const moment = require('moment')
 
+
 class OrdenTrabajoController { 
 
     //Ingresar
     async ingresarOrdenesTrabajo({request, params, response}){
         try{
 
-            let codigo = request.input('codigo');
-            let ordenCompra = request.input('ordencompra');//toUpperCase();
-            let fechaRegistro =request.input('fecharegistro')
-            let horaRecepcion = request.input('horarecepcion')
-            let proveedor = request.input('proveedor')//.toUpperCase();
-            let procedencia = request.input('procedencia')//.toUpperCase();
+            let codigo = request.input('codigo').toUpperCase();
+            let ordenCompra = request.input('ordencompra').toUpperCase();
+            let fechaRegistro = moment().format('YYYY-MM-DD');
+            let horaRecepcion = moment().format('mm:ss');
+            let proveedor = request.input('proveedor').toUpperCase();
+            let procedencia = request.input('procedencia').toUpperCase();
             let piscina = request.input('piscina');
-            let producto = request.input('producto')//.toUpperCase();
-            let camaronMar = request.input('camaronMar')//.toUpperCase();
-            let observacion = request.input('observacion')//.toUpperCase();
+            let producto = request.input('producto').toUpperCase();
+            let camaronMar = 0;
+            let observacion = request.input('observacion').toUpperCase();
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
 
@@ -44,8 +45,22 @@ class OrdenTrabajoController {
     async consultarOrdenTrabajo({request, params, response}){
         try {
 
-            const ordenTrabajo = await Database.raw("select codigo, ordencompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, estadoCalidad from ordenTrabajo where estado = 1 order by 1 desc;")
-            return response.status(200).send({ordenTrabajo:ordenTrabajo[0]})
+            const ordenesTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where estado = 1 order by 1 desc;")
+            return ordenesTrabajo[0]
+
+        } catch (error) {
+
+            return error
+        }
+    }
+
+
+    //Consultar Orden Compra
+    async consultarOrdenCompra({request, params, response}){
+        try {
+
+            const ordenesCompra = await Database.raw("select codigo from ordenCompra;")
+            return ordenesCompra[0]
 
         } catch (error) {
 
@@ -58,7 +73,7 @@ class OrdenTrabajoController {
         try {
             
             const{ordenTrabajoId} = request.params;
-            const ordenTrabajo = await Database.raw("select codigo, ordencompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, estadoCalidad from ordenTrabajo where id= '"+ordenTrabajoId+"' " )
+            const ordenTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where id= '"+ordenTrabajoId+"' " )
 
             return response.status(200).send({ordenTrabajo:ordenTrabajo[0]})
 
@@ -74,17 +89,18 @@ class OrdenTrabajoController {
         try {
             
             const {ordenTrabajoId} = request.params;
+            let codigo = request.input('codigo').toUpperCase();
             let ordenCompra = request.input('ordencompra').toUpperCase();
-            let fechaRegistro = moment().format('DD-MM-YYYY');
+            let fechaRegistro = moment().format('YYYY-MM-DD');
             let horaRecepcion = moment().format('HH:mm:ss');
             let proveedor = request.input('proveedor').toUpperCase();
             let procedencia = request.input('procedencia').toUpperCase();
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
-            let camaronMar = request.input('camaronMar').toUpperCase();
+            let camaronMar = request.input('camaronMar');
             let observacion = request.input('observacion').toUpperCase();
 
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"' ")
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"' where id='"+ordenTrabajoId+"' ")
 
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
 

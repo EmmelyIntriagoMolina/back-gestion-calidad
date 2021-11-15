@@ -11,11 +11,11 @@ class OrdenClienteController {
         try {
 
             
-            let destino = request.input('destino')//.toUpperCase();
-            let referencia=  request.input('referencia')//.toUpperCase();
-            let cliente = request.input('cliente')//.toUpperCase();
-            let producto = request.input('producto')//.toUpperCase();
-            let observacion  = request.input('observacion')//.toUpperCase();
+            let destino = request.input('destino').toUpperCase();
+            let referencia=  request.input('referencia').toUpperCase();
+            let cliente = request.input('cliente');
+            let producto = request.input('producto').toUpperCase();
+            let observacion  = request.input('observacion').toUpperCase();
             let fecha = moment().format('YYYY-MM-DD');
             let estado = 1;
 
@@ -27,8 +27,8 @@ class OrdenClienteController {
             }
             else { */
 
-                const ordenCliente = await Database.raw("insert into ordenCliente (destino, referencia, fecha, cliente, producto, observacion, estado) values ('"+destino+"', '"+referencia+"', '"+fecha+"', '"+cliente+"', '"+producto+"', '"+observacion+"', '"+estado+"')")
-                return response.status(200).send({message: 'Se ha registrado la orden de cliente correctamente', ordenCliente:ordenCliente[0]})
+                const ordenesCliente = await Database.raw("insert into ordenCliente (destino, referencia, fecha, cliente, producto, observacion, estado) values ('"+destino+"', '"+referencia+"', '"+fecha+"', '"+cliente+"', '"+producto+"', '"+observacion+"', '"+estado+"')")
+                return response.status(200).send({message: 'Se ha registrado la orden de cliente correctamente', ordenesCliente:ordenesCliente[0]})
         
            // }
 
@@ -43,8 +43,8 @@ class OrdenClienteController {
     async consultarOrdenCliente({request, params, response}){
         try {
 
-            const ordenCliente = await Database.raw("select numero, destino, referencia, fecha, cliente, producto, observacion  from ordenCliente where estado = 1 order by 1 desc;")
-            return response.status(200).send({ordenCliente:ordenCliente[0]})
+            const ordenesCliente = await Database.raw("select numero, fecha, referencia, cliente, destino from ordenCliente where estado = 1 order by 1 desc;")
+            return response.status(200).send({ordenesCliente:ordenesCliente[0]})
 
         } catch (error) {
 
@@ -74,16 +74,17 @@ class OrdenClienteController {
     async actualizarOrdenCliente({request, params, response}){
         try {
             
+            const {ordenClienteId} = request.params;
             let destino = request.input('destino').toUpperCase();
             let referencia=  request.input('referencia').toUpperCase();
             let cliente = request.input('cliente').toUpperCase();
             let producto = request.input('producto').toUpperCase();
-            let fecha = moment().format('DD-MM-YYYY');
+            let fecha = moment().format('YYYY-MM-DD');
             let observacion  = request.input('observacion').toUpperCase();
 
-            const ordenTrabajo = await Database.raw("update ordenCliente set destino='"+destino+"', referencia= '"+referencia+"', fecha= '"+fecha+"', cliente= '"+cliente+"', producto= '"+producto+"', observacion='"+observacion+"' ")
+            const ordenesCliente= await Database.raw("update ordenCliente set destino='"+destino+"', referencia= '"+referencia+"', fecha= '"+fecha+"', cliente= '"+cliente+"', producto= '"+producto+"', observacion='"+observacion+"' where numero='"+ordenClienteId+"' ")
 
-            return response.status(200).send({message: 'Se ha actualizado la orden de cliente correctamente', ordenCliente:ordenCliente[0]})
+            return response.status(200).send({message: 'Se ha actualizado la orden de cliente correctamente', ordenesCliente:ordenesCliente[0]})
 
         } catch (error) {
             
@@ -98,7 +99,7 @@ class OrdenClienteController {
             
             let estado = 0;
             const {ordenClienteId} = request.params;
-            const ordenCliente = await Database.raw("update ordenCliente set estado='"+estado+"' where id='"+ordenClienteId+"'  ")
+            const ordenesCliente = await Database.raw("update ordenCliente set estado='"+estado+"' where id='"+ordenClienteId+"'  ")
             
             return response.status(200).send({message: 'Se ha eliminado la orden de cliente correctamente'})
 

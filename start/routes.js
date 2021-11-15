@@ -41,3 +41,6 @@ Route.put('ordenCliente/actualizarOrdenCliente/:ordenClienteId', 'OrdenClienteCo
 
 //Eliminar orden t.
 Route.put('ordenCliente/eliminarOrdenCliente/:ordenClienteId', 'OrdenClienteController.eliminarOrdenCliente')
+
+//Orden Compra
+Route.get('ordenTrabajo/consultarOrdenesCompra', 'OrdenTrabajoController.consultarOrdenCompra')
