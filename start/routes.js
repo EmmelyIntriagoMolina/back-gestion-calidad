@@ -30,14 +30,18 @@ Route.put('ordenTrabajo/eliminarOrdenTrabajo/:ordenTrabajoId', 'OrdenTrabajoCont
 //Ingresar
 Route.post('ordenCliente/ingresarOrdenCliente', 'OrdenClienteController.ingresarOrdenCliente')
 
-//Consultar ordenes t.
+//Consultar ordenes c.
 Route.get('ordenCliente/consultarOrdenesCliente', 'OrdenClienteController.consultarOrdenCliente')
 
 //Consultar orden por id
 Route.get('ordenCliente/consultarOrdenClienteId/:ordenClienteId', 'OrdenClienteController.consultarOrdenClienteId')
 
-//Actualizar orden t.
+//Actualizar orden c.
 Route.put('ordenCliente/actualizarOrdenCliente/:ordenClienteId', 'OrdenClienteController.actualizarOrdenCliente')
 
-//Eliminar orden t.
+//Eliminar orden c.
 Route.put('ordenCliente/eliminarOrdenCliente/:ordenClienteId', 'OrdenClienteController.eliminarOrdenCliente')
+
+
+//Consultar orden compra
+Route.get('ordenTrabajo/consultarOrdenCompra', 'OrdenTrabajoController.consultarOrdenCompra')

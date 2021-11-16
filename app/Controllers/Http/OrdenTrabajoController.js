@@ -45,8 +45,8 @@ class OrdenTrabajoController {
     async consultarOrdenTrabajo({request, params, response}){
         try {
 
-            const ordenesTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where estado = 1 order by 1 desc;")
-            return ordenesTrabajo[0]
+            const ordenTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where estado = 1 order by 1 desc;")
+            return ordenTrabajo[0]
 
         } catch (error) {
 
@@ -88,8 +88,7 @@ class OrdenTrabajoController {
     async actualizarOrdenTrabajo({request, params, response}){
         try {
             
-            const {ordenTrabajoId} = request.params;
-            let codigo = request.input('codigo').toUpperCase();
+            const {ordenTrabajoId} = request.params;            
             let ordenCompra = request.input('ordencompra').toUpperCase();
             let fechaRegistro = moment().format('YYYY-MM-DD');
             let horaRecepcion = moment().format('HH:mm:ss');
@@ -99,7 +98,7 @@ class OrdenTrabajoController {
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
             let observacion = request.input('observacion').toUpperCase();
-
+            
             const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"' where id='"+ordenTrabajoId+"' ")
 
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
