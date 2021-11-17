@@ -9,7 +9,7 @@ class OrdenTrabajoController {
     async ingresarOrdenesTrabajo({request, params, response}){
         try{
 
-            let codigo = request.input('codigo').toUpperCase();
+            let codigo = request.input('codigo');
             let ordenCompra = request.input('ordencompra').toUpperCase();
             let fechaRegistro = moment().format('YYYY-MM-DD');
             let horaRecepcion = moment().format('mm:ss');
@@ -46,7 +46,7 @@ class OrdenTrabajoController {
         try {
 
             const ordenTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where estado = 1 order by 1 desc;")
-            return ordenTrabajo[0]
+            return response.status(200).send({ordenTrabajo:ordenTrabajo[0]})
 
         } catch (error) {
 

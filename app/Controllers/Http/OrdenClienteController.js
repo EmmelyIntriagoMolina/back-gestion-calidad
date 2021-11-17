@@ -43,8 +43,8 @@ class OrdenClienteController {
     async consultarOrdenCliente({request, params, response}){
         try {
 
-            const ordenesCliente = await Database.raw("select numero, fecha, referencia, cliente, destino from ordenCliente where estado = 1 order by 1 desc;")
-            return response.status(200).send({ordenesCliente:ordenesCliente[0]})
+            const ordenCliente = await Database.raw("select numero, fecha, referencia, cliente, destino from ordenCliente where estado = 1 order by 1 desc;")
+            return response.status(200).send({ordenCliente:ordenCliente[0]})
 
         } catch (error) {
 
