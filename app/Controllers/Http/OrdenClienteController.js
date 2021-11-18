@@ -16,7 +16,7 @@ class OrdenClienteController {
             let cliente = request.input('cliente');
             let producto = request.input('producto').toUpperCase();
             let observacion  = request.input('observacion').toUpperCase();
-            let fecha = moment().format('YYYY-MM-DD');
+            let fecha = moment().format('YYYY-MM-DD HH:mm"');
             let estado = 1;
 
             /*const existe = await Database.raw("select destino, referencia, fecha, cliente, producto, observacion, estado from ordenCliente where destino='"+destino+"' and referencia='"+referencia+"' and cliente='"+cliente+"' and fecha='"+fecha+"' ")
@@ -81,8 +81,9 @@ class OrdenClienteController {
             let producto = request.input('producto').toUpperCase();
             let fecha = moment().format('YYYY-MM-DD');
             let observacion  = request.input('observacion').toUpperCase();
+            let estado = request.input('estado')
 
-            const ordenesCliente= await Database.raw("update ordenCliente set destino='"+destino+"', referencia= '"+referencia+"', fecha= '"+fecha+"', cliente= '"+cliente+"', producto= '"+producto+"', observacion='"+observacion+"' where numero='"+ordenClienteId+"' ")
+            const ordenesCliente= await Database.raw("update ordenCliente set destino='"+destino+"', referencia= '"+referencia+"', fecha= '"+fecha+"', cliente= '"+cliente+"', producto= '"+producto+"', observacion='"+observacion+"', estado='"+estado+"' where numero='"+ordenClienteId+"' ")
 
             return response.status(200).send({message: 'Se ha actualizado la orden de cliente correctamente', ordenesCliente:ordenesCliente[0]})
 
@@ -99,7 +100,7 @@ class OrdenClienteController {
             
             let estado = 0;
             const {ordenClienteId} = request.params;
-            const ordenesCliente = await Database.raw("update ordenCliente set estado='"+estado+"' where id='"+ordenClienteId+"'  ")
+            const ordenCliente = await Database.raw("update ordenCliente set estado='"+estado+"' where numero='"+ordenClienteId+"'  ")
             
             return response.status(200).send({message: 'Se ha eliminado la orden de cliente correctamente'})
 

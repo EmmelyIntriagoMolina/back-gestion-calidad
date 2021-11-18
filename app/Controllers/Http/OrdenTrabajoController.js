@@ -98,8 +98,10 @@ class OrdenTrabajoController {
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
             let observacion = request.input('observacion').toUpperCase();
+            let estadoCalidad = request.input('estadoCalidad').toUpperCase();
+            let estado = request.input('estado');
             
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"' where id='"+ordenTrabajoId+"' ")
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"', estadoCalidad= '"+estadoCalidad+"', estado= '"+estado+"' where id='"+ordenTrabajoId+"' ")
 
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
 
@@ -116,7 +118,7 @@ class OrdenTrabajoController {
             
             let estado = 0;
             const {ordenTrabajoId} = request.params;
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set estado='"+estado+"' where id='"+ordenTrabajoId+"'  ")
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set estado='"+estado+"' where codigo='"+ordenTrabajoId+"'  ")
             
             return response.status(200).send({message: 'Se ha eliminado la orden de trabajo correctamente'})
 
