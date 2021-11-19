@@ -45,3 +45,17 @@ Route.put('ordenCliente/eliminarOrdenCliente/:ordenClienteId', 'OrdenClienteCont
 
 //Consultar orden compra
 Route.get('ordenTrabajo/consultarOrdenCompra', 'OrdenTrabajoController.consultarOrdenCompra')
+
+//////////////////////////////////////////////////
+//Rutas Guías de Remisión
+//Ingresar guias r.
+Route.post('guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresarGuiaRemision')
+
+//Consultar guias r.
+Route.get('guiaRemision/consultarGuiasRemision', 'GuiasRemisionController.consultarGuiasRemision')
+
+//Actualizar guias r.
+Route.put('guiaRemision/actualizarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')
+
+//Eliminar guias r.
+Route.put('guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')
