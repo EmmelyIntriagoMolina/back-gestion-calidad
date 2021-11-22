@@ -9,16 +9,16 @@ class OrdenTrabajoController {
     async ingresarOrdenesTrabajo({request, params, response}){
         try{
 
-            let codigo = request.input('codigo');
-            let ordenCompra = request.input('ordencompra').toUpperCase();
+            let codigo = request.input('codigo').toUpperCase();
+            let ordenCompra = request.input('ordencompra');
             let fechaRegistro = moment().format('YYYY-MM-DD');
             let horaRecepcion = moment().format('mm:ss');
-            let proveedor = request.input('proveedor').toUpperCase();
+            let proveedor = request.input('proveedor');
             let procedencia = request.input('procedencia').toUpperCase();
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
-            let camaronMar = 0;
-            let observacion = request.input('observacion').toUpperCase();
+            let camaronMar = request.input('camaronMar');
+            let observacion = request.input('observacion');
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
 

@@ -49,13 +49,13 @@ Route.get('ordenTrabajo/consultarOrdenCompra', 'OrdenTrabajoController.consultar
 //////////////////////////////////////////////////
 //Rutas Guías de Remisión
 //Ingresar guias r.
-Route.post('guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresarGuiaRemision')
+Route.post('ordenTrabajo/guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresarGuiaRemision')
 
 //Consultar guias r.
-Route.get('guiaRemision/consultarGuiasRemision', 'GuiasRemisionController.consultarGuiasRemision')
+Route.get('ordenTrabajo/guiaRemision/consultarGuiasRemision', 'GuiasRemisionController.consultarGuiasRemision')
 
 //Actualizar guias r.
-Route.put('guiaRemision/actualizarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')
+Route.put('ordenTrabajo/guiaRemision/actualizarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')
 
 //Eliminar guias r.
-Route.put('guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')
+Route.put('ordenTrabajo/guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')
