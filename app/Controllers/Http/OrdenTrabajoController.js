@@ -9,20 +9,21 @@ class OrdenTrabajoController {
     async ingresarOrdenesTrabajo({request, params, response}){
         try{
 
-            let codigo = request.input('codigo').toUpperCase();
+            let codigo = request.input('codigo');
             let ordenCompra = request.input('ordencompra');
-            let fechaRegistro = moment().format('YYYY-MM-DD');
-            let horaRecepcion = moment().format('mm:ss');
+            let fechaRegistro = request.input('fecharegistro')
+            let horaRecepcion = request.input('horarecepcion')
             let proveedor = request.input('proveedor');
             let procedencia = request.input('procedencia').toUpperCase();
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
             let observacion = request.input('observacion');
+            let tipoproducto = request.input('tipoproducto');
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
 
-            const existe = await Database.raw("select ordencompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion , estado, estadoCalidad from ordenTrabajo where codigo='"+codigo+"'")
+            const existe = await Database.raw("select ordencompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproducto, estado, estadoCalidad from ordenTrabajo where codigo='"+codigo+"'")
 
             if(existe[0].length >=1){
 
@@ -30,7 +31,7 @@ class OrdenTrabajoController {
             }
             else {
 
-                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (codigo, ordenCompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, estado, estadoCalidad) values ('"+codigo+"','"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"' )")
+                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (codigo, ordenCompra, fecharegistro, horaRecepcion, proveedor, procedencia, piscina, producto, tipoproducto,camaronMar, observacion, estado, estadoCalidad) values ('"+codigo+"','"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+tipoproducto+"','"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"' )")
                 return response.status(200).send({message: 'Se ha registrado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
             
             }
@@ -51,7 +52,7 @@ class OrdenTrabajoController {
         } catch (error) {
 
             return error
-        }
+        } 
     }
 
 
@@ -98,10 +99,11 @@ class OrdenTrabajoController {
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
             let observacion = request.input('observacion').toUpperCase();
+            let tipoproducto = reuqest.input('tipoproducto').toUpperCase();
             let estadoCalidad = request.input('estadoCalidad').toUpperCase();
             let estado = request.input('estado');
             
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"', estadoCalidad= '"+estadoCalidad+"', estado= '"+estado+"' where id='"+ordenTrabajoId+"' ")
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', tipoproducto='"+tipoproducto+"',camaronMar='"+camaronMar+"', observacion= '"+observacion+"', estadoCalidad= '"+estadoCalidad+"', estado= '"+estado+"' where id='"+ordenTrabajoId+"' ")
 
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
 
