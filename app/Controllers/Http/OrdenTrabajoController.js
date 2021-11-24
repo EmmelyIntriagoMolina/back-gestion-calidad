@@ -74,7 +74,7 @@ class OrdenTrabajoController {
         try {
             
             const{ordenTrabajoId} = request.params;
-            const ordenTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where id= '"+ordenTrabajoId+"' " )
+            const ordenTrabajo = await Database.raw("select codigo, fecharegistro,  proveedor, lote, estadoCalidad from ordenTrabajo where id= '"+ordenTrabajoId+"' ;" )
 
             return response.status(200).send({ordenTrabajo:ordenTrabajo[0]})
 
