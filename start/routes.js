@@ -47,15 +47,20 @@ Route.put('ordenCliente/eliminarOrdenCliente/:ordenClienteId', 'OrdenClienteCont
 Route.get('ordenTrabajo/consultarOrdenCompra', 'OrdenTrabajoController.consultarOrdenCompra')
 
 //////////////////////////////////////////////////
+
+
 //Rutas Guías de Remisión
 //Ingresar guias r.
-Route.post('ordenTrabajo/guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresarGuiaRemision')
+Route.post('guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresarGuiaRemision')
 
 //Consultar guias r.
-Route.get('ordenTrabajo/guiaRemision/consultarGuiasRemision', 'GuiasRemisionController.consultarGuiasRemision')
+Route.get('guiaRemision/consultarGuiaRemision', 'GuiasRemisionController.consultarGuiasRemision')
+
+//Consultar guias r. por id
+Route.get('guiaRemision/consultarGuiaRemisionId/:guiaremisionId', 'GuiasRemisionController.consultarGuiaRemisionId')
 
 //Actualizar guias r.
-Route.put('ordenTrabajo/guiaRemision/actualizarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')
+Route.put('guiaRemision/actualizarGuiaRemisionId/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')
 
 //Eliminar guias r.
-Route.put('ordenTrabajo/guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')
+Route.put('guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')

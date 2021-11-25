@@ -6,7 +6,7 @@ const moment = require('moment')
 class GuiasRemisionController {
 
     //Ingresar
-    async ingresarGuiaRemision ({request, params, response}){
+    async ingresarGuiaRemision({request, params, response}){
         try{
             let codigo=request.input('codigo').toUpperCase();
             let horaingreso=request.input('horaingreso').toUpperCase();
@@ -31,15 +31,13 @@ class GuiasRemisionController {
 
         }
         catch(error) {
-
             console.log("No añadido", error)
-
         }
     }
 
     //Consultar
 
-    async consultarGuiasRemision ({request, params, response}){
+    async consultarGuiasRemision({request, params, response}){
 
         try{
 
@@ -56,14 +54,14 @@ class GuiasRemisionController {
 
     //Consultar por codigo
 
-    async consultarGuiasRemisionId ({request, params, response}){
+    async consultarGuiaRemisionId({request, params, response}){
 
         try {
 
             const {guiaremisionId} = request.params;
-            const guiaremision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas,muestra, estado from guiasremision where codigo='"+guiaremisionId+"'");
+            const guiaRemision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id='"+guiaremisionId+"'");
 
-            return response.status(200).send({guiaremision:guiaremision[0]});
+            return response.status(200).send({guiaremision:guiaRemision[0]});
             
         } catch (error) {
 
@@ -74,7 +72,7 @@ class GuiasRemisionController {
 
     //Actualizar
 
-    async actualizarGuiaRemision ({request, params, response}){
+    async actualizarGuiaRemision({request, params, response}){
 
         try {
 
@@ -99,7 +97,7 @@ class GuiasRemisionController {
 
     //Eliminar
 
-    async eliminarGuiaRemimsion ({request, params, response}){
+    async eliminarGuiaRemimsion({request, params, response}){
 
         try {
 
