@@ -64,7 +64,7 @@ class GuiasRemisionController {
             return response.status(200).send({guiaremision:guiaRemision[0]});
             
         } catch (error) {
-
+            
             console.log(error)
             
         }
@@ -97,19 +97,19 @@ class GuiasRemisionController {
 
     //Eliminar
 
-    async eliminarGuiaRemimsion({request, params, response}){
+    async eliminarGuiaRemision({request, params, response}){
 
         try {
 
             let estado = 0;
             const {guiaremisionId} = request.params;
-            const guiaremision = await Database.raw("update guiasremision set estado='"+estado+"' where codigo='"+guiaremisionId+"'");
+            const guiaremision = await Database.raw("update guiasremision set estado='"+estado+"' where id='"+guiaremisionId+"';");
 
             return response.status(200).send({message:"Guía de remisión ha sido eliminada correctamente"})
             
         } catch (error) {
 
-            console.log("No se ha podido elimiar la guía de remisión "+guiaremisionId+ " ", error)
+            console.log("No se ha podido elimiar la guía de remisión ", error)
             
         }
     }
