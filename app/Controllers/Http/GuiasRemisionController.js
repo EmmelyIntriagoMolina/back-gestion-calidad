@@ -8,15 +8,17 @@ class GuiasRemisionController {
     //Ingresar
     async ingresarGuiaRemision({request, params, response}){
         try{
+
             let codigo=request.input('codigo').toUpperCase();
             let horaingreso=request.input('horaingreso').toUpperCase();
             let placa=request.input('placa').toUpperCase();
             let chofer=request.input('chofer').toUpperCase();
             let peso=request.input('peso').toUpperCase();
             let gavetas=request.input('gavetas').toUpperCase();
+            let id_OT = request.input('id_OT')
             let estado = 1;
 
-            const guiaremision = await Database.raw("select codigo, horaingreso, placa chofer, peso, gavetas from guiasremision where codigo='"+codigo+"'");
+            const guiaremision = await Database.raw("select codigo, horaingreso, placa chofer, peso, gavetas, id_OT from guiasremision where codigo='"+codigo+"'");
 
             if (existe[0].length >=1){
 
@@ -24,9 +26,9 @@ class GuiasRemisionController {
             }
             else {
 
-                const guiaremision = await Database.raw("insert into guiasremision (codigo, horaingreso, placa, chofer, peso, gavetas, estado) values ('"+codigo+"','"+horaingreso+"', '"+placa+"', '"+chofer+"', '"+peso+"', '"+gavetas+"', '"+estado+"')");
-
+                const guiaremision = await Database.raw("insert into guiasremision (codigo, horaingreso, placa, chofer, peso, gavetas, id_OT, estado) values ('"+codigo+"','"+horaingreso+"', '"+placa+"', '"+chofer+"', '"+peso+"', '"+gavetas+"', '"+id_OT+"', '"+estado+"')");
                 return response.status(200).send({message: 'Se ha registrado la guía de remisión correctamente', guiaremision:guiaremision[0]});
+            
             }
 
         }
@@ -42,7 +44,6 @@ class GuiasRemisionController {
         try{
 
             const guiaremision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas,muestra, estado from guiasremision where estado=1 order by 1 desc;");
-
             return response.status(200).send({guiaremision:guiaremision[0]});
 
         }
@@ -58,9 +59,8 @@ class GuiasRemisionController {
 
         try {
 
-            const {guiaremisionId} = request.params;
-            const guiaRemision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id='"+guiaremisionId+"'");
-
+            const {guiaremisionIdOT} = request.params;
+            const guiaRemision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id_OT='"+guiaremisionIdot+"'");
             return response.status(200).send({guiaremision:guiaRemision[0]});
             
         } catch (error) {
@@ -85,7 +85,6 @@ class GuiasRemisionController {
             let gavetas=request.input('gavetas').toUpperCase();
             
             const guiaremision = await Database.raw("update guiasremision set codigo='"+cdigo+"', horaingreso='"+horaingreso+"', placa='"+placa+"', chofer='"+chofer+"', peso='"+peso+"', gavetas='"+gavetas+"' where codigo='"+guiaremisionId+"'");
-
             return response.status(200).send({message: 'Guia de remisión '+codigo+ ' actualizada correctamente', guiaremision:guiaremision[0]});
 
         } catch (error) {
@@ -104,7 +103,6 @@ class GuiasRemisionController {
             let estado = 0;
             const {guiaremisionId} = request.params;
             const guiaremision = await Database.raw("update guiasremision set estado='"+estado+"' where id='"+guiaremisionId+"';");
-
             return response.status(200).send({message:"Guía de remisión ha sido eliminada correctamente"})
             
         } catch (error) {
