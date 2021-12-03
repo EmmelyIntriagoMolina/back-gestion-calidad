@@ -25,6 +25,12 @@ Route.put('ordenTrabajo/actualizarOrdenTrabajo/:ordenTrabajoId', 'OrdenTrabajoCo
 //Eliminar orden t.
 Route.put('ordenTrabajo/eliminarOrdenTrabajo/:ordenTrabajoId', 'OrdenTrabajoController.eliminarOrdenTrabajo')
 
+//Actualizar Aprobacion
+Route.put('ordenTrabajo/actualizarOrdenTrabajoAprobacion/:ordenTrabajoId', 'OrdenTrabajoController.actualizarOrdenTrabajoAprobacion')
+
+
+
+
 //////////////////////////////////////////////////
 //Rutas orden de Cliente CRUD
 //Ingresar

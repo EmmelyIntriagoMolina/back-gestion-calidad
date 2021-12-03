@@ -60,8 +60,8 @@ class GuiasRemisionController {
         try {
 
             const {guiaremisionIdOT} = request.params;
-            const guiaRemision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id_OT='"+guiaremisionIdot+"'");
-            return response.status(200).send({guiaremision:guiaRemision[0]});
+            const guiaRemisionId = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id='"+guiaremisionIdOT+"'");
+            return response.status(200).send({guiaRemisionId:guiaRemisionId[0]});
             
         } catch (error) {
             

@@ -22,8 +22,9 @@ class OrdenTrabajoController {
             let tipoproducto = request.input('tipoproducto');
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
+            let calidad = request.input('calidad');
 
-            const existe = await Database.raw("select ordencompra, fechRregistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproducto, estado, estadoCalidad from ordenTrabajo where codigo='"+codigo+"'")
+            const existe = await Database.raw("select ordencompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproducto, estado, estadoCalidad, calidad from ordenTrabajo where codigo='"+codigo+"'")
 
             if(existe[0].length >=1){
 
@@ -31,7 +32,7 @@ class OrdenTrabajoController {
             }
             else {
 
-                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (codigo, ordenCompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, tipoproducto,camaronMar, observacion, estado, estadoCalidad) values ('"+codigo+"','"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+tipoproducto+"','"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"' )")
+                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (codigo, ordenCompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, tipoproducto,camaronMar, observacion, estado, estadoCalidad, calidad) values ('"+codigo+"','"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+tipoproducto+"','"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"', '"+calidad+"' )")
                 return response.status(200).send({message: 'Se ha registrado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
             
             }
@@ -113,6 +114,29 @@ class OrdenTrabajoController {
             
         }
     }
+
+
+    //Actualizar Aprobacion
+    async actualizarOrdenTrabajoAprobacion({request, params, response}){
+        try {
+            
+            const {ordenTrabajoId} = request.params;            
+            let estadoCalidad = request.input('estadoCalidad').toUpperCase();
+            let lote = request.input('lote');
+            let colorCamaron = request.input('colorCamaron');
+            let calidad = request.input('calidad');
+            
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set lote='"+lote+"', colorCamaron= '"+colorCamaron+"', calidad= '"+calidad+"', estadoCalidad='"+estadoCalidad+"' where id='"+ordenTrabajoId+"'")
+
+            return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
+
+        } catch (error) {
+            
+            console.log("Orden de trabajo no actualizada", error)
+            
+        }
+    }
+
 
     //Eliminar
     async eliminarOrdenTrabajo({request, params, response}){
