@@ -58,7 +58,7 @@ class OrdenClienteController {
         try {
             
             const{ordenClienteId} = request.params;
-            const ordenCliente = await Database.raw("select numero, destino, referencia, fecha, cliente, producto, observacion from ordenTrabajo where id= '"+ordenClienteId+"' " )
+            const ordenCliente = await Database.raw("select numero, destino, referencia, fecha, cliente, producto, observacion from ordenCliente where numero= '"+ordenClienteId+"' ;" )
 
             return response.status(200).send({ordenCliente:ordenCliente[0]})
 

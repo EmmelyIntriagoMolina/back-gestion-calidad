@@ -10,11 +10,11 @@ class GuiasRemisionController {
         try{
 
             let codigo=request.input('codigo').toUpperCase();
-            let horaingreso=request.input('horaingreso').toUpperCase();
+            let horaingreso=request.input('horaingreso');
             let placa=request.input('placa').toUpperCase();
             let chofer=request.input('chofer').toUpperCase();
-            let peso=request.input('peso').toUpperCase();
-            let gavetas=request.input('gavetas').toUpperCase();
+            let peso=request.input('peso');
+            let gavetas=request.input('gavetas');
             let id_OT = request.input('id_OT')
             let estado = 1;
 
@@ -53,18 +53,18 @@ class GuiasRemisionController {
         }
     }
 
-    //Consultar por codigo
+    //Consultar por id_OT
 
     async consultarGuiaRemisionId({request, params, response}){
 
         try {
 
-            const {guiaremisionIdOT} = request.params;
-            const guiaRemisionId = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado from guiasremision where id='"+guiaremisionIdOT+"'");
-            return response.status(200).send({guiaRemisionId:guiaRemisionId[0]});
+            const {guiaremisionId} = request.params;
+            const guiaremision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado, id_OT from guiasremision where id_OT='"+guiaremisionId+"' and estado=1 order by 1 desc;");
+            return response.status(200).send({guiaremision:guiaremision[0]});
             
         } catch (error) {
-            
+             
             console.log(error)
             
         }
