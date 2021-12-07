@@ -18,12 +18,12 @@ class OrdenTrabajoController {
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
-            let observacion = request.input('observacion');
-            let tipoproductoC = request.input('tipoproductoC');
-            let tipoproductoD = request.input('tipoproductoD');
+            let observacion = request.input('observacion').toUpperCase();
+            let tipoproductoC = request.input('tipoproductoC').toUpperCase();
+            let tipoproductoD = request.input('tipoproductoD').toUpperCase();
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
-            let calidad = request.input('calidad');
+            let calidad = request.input('calidad').toUpperCase();
 
             const existe = await Database.raw("select ordencompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproductoC, tipoproductoC , estado, estadoCalidad, calidad from ordenTrabajo where codigo='"+codigo+"'")
 
@@ -126,8 +126,8 @@ class OrdenTrabajoController {
             const {ordenTrabajoId} = request.params;            
             let estadoCalidad = request.input('estadoCalidad').toUpperCase();
             let lote = request.input('lote');
-            let colorCamaron = request.input('colorCamaron');
-            let calidad = request.input('calidad');
+            let colorCamaron = request.input('colorCamaron').toUpperCase();
+            let calidad = request.input('calidad').toUpperCase();
             
             const ordenTrabajo = await Database.raw("update ordenTrabajo set lote='"+lote+"', colorCamaron= '"+colorCamaron+"', calidad= '"+calidad+"', estadoCalidad='"+estadoCalidad+"' where id='"+ordenTrabajoId+"'")
 
@@ -146,8 +146,8 @@ class OrdenTrabajoController {
         try {
             
             let estado = 0;
-            const {ordenTrabajoId} = request.params;
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set estado='"+estado+"' where codigo='"+ordenTrabajoId+"'  ")
+            const {ordenTrabajoId} = request.params; 
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set estado='"+estado+"' where id='"+ordenTrabajoId+"'  ")
             
             return response.status(200).send({message: 'Se ha eliminado la orden de trabajo correctamente'})
 
