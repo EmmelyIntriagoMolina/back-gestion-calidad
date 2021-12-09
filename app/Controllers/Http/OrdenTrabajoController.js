@@ -18,12 +18,12 @@ class OrdenTrabajoController {
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
-            let observacion = request.input('observacion').toUpperCase();
-            let tipoproductoC = request.input('tipoproductoC').toUpperCase();
-            let tipoproductoD = request.input('tipoproductoD').toUpperCase();
+            let observacion = request.input('observacion');
+            let tipoproductoC = request.input('tipoproductoC');
+            let tipoproductoD = request.input('tipoproductoD');
             let estado = 1;
             let estadoCalidad = "EN ESPERA";
-            let calidad = request.input('calidad').toUpperCase();
+            let calidad = request.input('calidad');
 
             const existe = await Database.raw("select ordencompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproductoC, tipoproductoC , estado, estadoCalidad, calidad from ordenTrabajo where codigo='"+codigo+"'")
 
