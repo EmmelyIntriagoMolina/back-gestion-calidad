@@ -22,7 +22,7 @@ class OrdenTrabajoController {
             let tipoproductoC = request.input('tipoproductoC');
             let tipoproductoD = request.input('tipoproductoD');
             let estado = 1;
-            let estadoCalidad = "EN ESPERA";
+            let estadoCalidad = "SIN ATENDER";
             let calidad = request.input('calidad');
 
             const existe = await Database.raw("select ordencompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, camaronMar, observacion, tipoproductoC, tipoproductoC , estado, estadoCalidad, calidad from ordenTrabajo where codigo='"+codigo+"'")
@@ -33,7 +33,7 @@ class OrdenTrabajoController {
             }
             else {
 
-                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (codigo, ordenCompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, tipoproductoC, tipoproductoD,camaronMar, observacion, estado, estadoCalidad, calidad) values ('"+codigo+"','"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+tipoproductoC+"', '"+tipoproductoD+"','"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"', '"+calidad+"' )")
+                const ordenTrabajo = await Database.raw("insert into ordenTrabajo (ordenCompra, fechaRegistro, horaRecepcion, proveedor, procedencia, piscina, producto, tipoproductoC, tipoproductoD,camaronMar, observacion, estado, estadoCalidad, calidad) values ('"+ordenCompra+"', '"+fechaRegistro+"', '"+horaRecepcion+"', '"+proveedor+"', '"+procedencia+"', '"+piscina+"', '"+producto+"', '"+tipoproductoC+"', '"+tipoproductoD+"','"+camaronMar+"', '"+observacion+"', '"+estado+"', '"+estadoCalidad+"', '"+calidad+"' )")
                 return response.status(200).send({message: 'Se ha registrado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
             
             }
