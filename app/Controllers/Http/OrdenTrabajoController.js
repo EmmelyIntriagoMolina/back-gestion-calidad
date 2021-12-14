@@ -127,7 +127,7 @@ class OrdenTrabajoController {
             let estadoCalidad = request.input('estadoCalidad').toUpperCase();
             let lote = request.input('lote');
             let colorCamaron = request.input('colorCamaron').toUpperCase();
-            let calidad = request.input('calidad').toUpperCase();
+            let calidad = request.input('calidad');
             
             const ordenTrabajo = await Database.raw("update ordenTrabajo set lote='"+lote+"', colorCamaron= '"+colorCamaron+"', calidad= '"+calidad+"', estadoCalidad='"+estadoCalidad+"' where id='"+ordenTrabajoId+"'")
 
