@@ -62,8 +62,11 @@ Route.post('guiaRemision/ingresarGuiaRemision', 'GuiasRemisionController.ingresa
 //Consultar guias r.
 Route.get('guiaRemision/consultarGuiaRemision', 'GuiasRemisionController.consultarGuiasRemision')
 
-//Consultar guias r. por id
+//Consultar guias r. por id_OT
 Route.get('guiaRemision/consultarGuiaRemisionId/:guiaremisionId', 'GuiasRemisionController.consultarGuiaRemisionId')
+
+//Consultar guias r. por id
+Route.get('guiaRemision/consultarGuiaRemisionIdd/:guiaremisionId', 'GuiasRemisionController.consultarGuiaRemisionIdd')
 
 //Actualizar guias r.
 Route.put('guiaRemision/actualizarGuiaRemisionId/:guiaremisionId', 'GuiasRemisionController.actualizarGuiaRemision')

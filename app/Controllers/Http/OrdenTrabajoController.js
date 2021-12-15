@@ -93,28 +93,25 @@ class OrdenTrabajoController {
         try {
             
             const {ordenTrabajoId} = request.params;            
-            let ordenCompra = request.input('ordencompra').toUpperCase();
+            let ordenCompra = request.input('ordencompra');
             let fechaRegistro = moment().format('YYYY-MM-DD');
             let horaRecepcion = moment().format('HH:mm:ss');
-            let proveedor = request.input('proveedor').toUpperCase();
+            let proveedor = request.input('proveedor');
             let procedencia = request.input('procedencia').toUpperCase();
             let piscina = request.input('piscina');
             let producto = request.input('producto').toUpperCase();
             let camaronMar = request.input('camaronMar');
-            let observacion = request.input('observacion').toUpperCase();
-            let tipoproductoC = reuqest.input('tipoproductoC').toUpperCase();
-            let tipoproductoD = reuqest.input('tipoproductoD').toUpperCase();
-            let estadoCalidad = request.input('estadoCalidad').toUpperCase();
-            let estado = request.input('estado');
+            let observacion = request.input('observacion');
+            let tipoproductoC = request.input('tipoproductoC');
+            let tipoproductoD = request.input('tipoproductoD');
             
-            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', tipoproductoC='"+tipoproductoC+"',tipoproductoD='"+tipoproductoD+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"', estadoCalidad= '"+estadoCalidad+"', estado= '"+estado+"' where id='"+ordenTrabajoId+"' ")
-
+            const ordenTrabajo = await Database.raw("update ordenTrabajo set ordenCompra='"+ordenCompra+"', fechaRegistro= '"+fechaRegistro+"', horaRecepcion= '"+horaRecepcion+"', proveedor= '"+proveedor+"', procedencia= '"+procedencia+"', piscina='"+piscina+"', producto= '"+producto+"', tipoproductoC='"+tipoproductoC+"',tipoproductoD='"+tipoproductoD+"', camaronMar='"+camaronMar+"', observacion= '"+observacion+"' where id='"+ordenTrabajoId+"' ")
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
 
         } catch (error) {
             
             console.log("Orden de trabajo no actualizada", error)
-            
+           
         }
     }
 

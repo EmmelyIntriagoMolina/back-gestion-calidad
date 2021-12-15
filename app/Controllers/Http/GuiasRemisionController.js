@@ -53,6 +53,23 @@ class GuiasRemisionController {
         }
     }
 
+    // Consultar por ID 
+    async consultarGuiaRemisionIdd({request, params, response}){
+
+        try {
+
+            const {guiaremisionId} = request.params;
+            const guiaremision = await Database.raw("select id, codigo, horaingreso, placa, chofer, peso, gavetas, muestra, estado, id_OT from guiasremision where id='"+guiaremisionId+"' and estado=1 order by 1 desc;");
+            return response.status(200).send({guiaremision:guiaremision[0]});
+            
+        } catch (error) {
+             
+            console.log(error)
+            
+        }
+    }
+
+
     //Consultar por id_OT
 
     async consultarGuiaRemisionId({request, params, response}){
