@@ -127,7 +127,7 @@ class OrdenTrabajoController {
             let calidad = request.input('calidad');
             
             const ordenTrabajo = await Database.raw("update ordenTrabajo set lote='"+lote+"', colorCamaron= '"+colorCamaron+"', calidad= '"+calidad+"', estadoCalidad='"+estadoCalidad+"' where id='"+ordenTrabajoId+"'")
-
+            
             return response.status(200).send({message: 'Se ha actualizado la orden de trabajo correctamente', ordenTrabajo:ordenTrabajo[0]})
 
         } catch (error) {
@@ -136,6 +136,7 @@ class OrdenTrabajoController {
             
         }
     }
+
 
 
     //Eliminar
