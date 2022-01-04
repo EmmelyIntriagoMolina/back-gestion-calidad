@@ -73,3 +73,11 @@ Route.put('guiaRemision/actualizarGuiaRemisionId/:guiaremisionId', 'GuiasRemisio
 
 //Eliminar guias r.
 Route.put('guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionController.eliminarGuiaRemision')
+
+
+//Analisis
+//Ingresar
+Route.post('ordenTrabajo/guiasRemision/:id/analisisCalidad/guardarAnalisis/:id', 'AnalisisProductoController.guardarAnalisisProducto')
+
+//Consulta por ID
+Route.get('ordenTrabajo/guiasRemision/:id/analisisCalidad/:id', 'AnalisisProductoController.consultarAnalisisProductoId')
