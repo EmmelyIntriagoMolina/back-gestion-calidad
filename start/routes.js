@@ -28,9 +28,6 @@ Route.put('ordenTrabajo/eliminarOrdenTrabajo/:ordenTrabajoId', 'OrdenTrabajoCont
 //Actualizar Aprobacion
 Route.put('ordenTrabajo/actualizarOrdenTrabajoAprobacion/:ordenTrabajoId', 'OrdenTrabajoController.actualizarOrdenTrabajoAprobacion')
 
-
-
-
 //////////////////////////////////////////////////
 //Rutas orden de Cliente CRUD
 //Ingresar
@@ -77,7 +74,7 @@ Route.put('guiaRemision/eliminarGuiaRemision/:guiaremisionId', 'GuiasRemisionCon
 
 //Analisis
 //Ingresar
-Route.post('ordenTrabajo/guiasRemision/:id/analisisCalidad/guardarAnalisis/:id', 'AnalisisProductoController.guardarAnalisisProducto')
+Route.post('ordenTrabajo/guiasRemision/analisisCalidad/guardarAnalisis/', 'AnalisisProductoController.guardarAnalisisProducto')
 
 //Consulta por ID
-Route.get('ordenTrabajo/guiasRemision/:id/analisisCalidad/:id', 'AnalisisProductoController.consultarAnalisisProductoId')
+Route.get('ordenTrabajo/guiasRemision/analisisCalidad/:analisisCalidadId', 'AnalisisProductoController.consultarAnalisisProductoId')
